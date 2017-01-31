@@ -1,0 +1,20 @@
+REPO=$1
+if curl -v https://raw.githubusercontent.com/$REPO/master/install.sh 2>&1 | grep "200 OK" > /dev/null
+then
+	# compatible
+	echo "GHInstall-compatible repository found; downloading..."
+	if [ -d ~/ghinstall/$REPO ]
+	then
+		git pull ~/ghinstall/$REPO
+	else
+		mkdir -p ~/ghinstall/$REPO
+		git clone https://github.com/$REPO.git ~/ghinstall/$REPO
+	fi
+	echo "Executing GHInstall script..."
+	chmod +x ~/ghinstall/$REPO/install.sh
+	shift
+	sh ~/ghinstall/$REPO/install.sh $@
+else
+	# incompatible
+	echo "That repository is not compatible with GHInstall"
+fi
