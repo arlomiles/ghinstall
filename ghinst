@@ -5,10 +5,10 @@ then
 	echo "GHInstall-compatible repository found; downloading..."
 	if [ -d ~/ghinstall/$REPO ]
 	then
-		git pull ~/ghinstall/$REPO
+		git pull -v ~/ghinstall/$REPO
 	else
 		mkdir -p ~/ghinstall/$REPO
-		git clone https://github.com/$REPO.git ~/ghinstall/$REPO
+		git clone -v https://github.com/$REPO.git ~/ghinstall/$REPO
 	fi
 	echo "Executing GHInstall script..."
 	chmod +x ~/ghinstall/$REPO/install.sh
